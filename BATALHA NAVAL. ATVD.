@@ -28,3 +28,90 @@ int main() {
 
     return 0;
 }
+#include <stdio.h>
+
+#define TAM 10
+
+int main() {
+    int tabuleiro[TAM][TAM] = {0};
+
+    // Navio 1 vertical (3 partes)
+    for (int i = 1; i <= 3; i++) tabuleiro[i][2] = 3;
+
+    // Navio 2 horizontal (4 partes)
+    for (int j = 4; j <= 7; j++) tabuleiro[5][j] = 3;
+
+    // Navio 3 diagonal descendente (3 partes): (7,7),(8,8),(9,9)
+    for (int i = 7; i <= 9; i++) tabuleiro[i][i] = 3;
+
+    // Navio 4 diagonal ascendente (3 partes): (9,0),(8,1),(7,2)
+    for (int i = 0; i <= 2; i++) tabuleiro[9 - i][i] = 3;
+
+    // Exibir tabuleiro
+    printf("Tabuleiro 10x10 (0 = vazio, 3 = navio):\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+#include <stdio.h>
+
+#define TAM 5
+
+void printMatriz(int m[TAM][TAM]) {
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%d ", m[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int main() {
+    // Habilidade Cone (padrão 3x5 centrado em 5x5)
+    int cone[TAM][TAM] = {0};
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            // Forma de cone (linha central maior, reduz para cima/baixo)
+            int dist = abs(2 - i);
+            if (j >= dist && j < TAM - dist) {
+                cone[i][j] = 1;
+            }
+        }
+    }
+
+    // Habilidade Cruz (padrão 3 linhas com 5 e 3 posições)
+    int cruz[TAM][TAM] = {0};
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            if (i == 2 || j == 2) {  // linha e coluna do meio
+                cruz[i][j] = 1;
+            }
+        }
+    }
+
+    // Habilidade Octaedro (padrão simétrico)
+    int octaedro[TAM][TAM] = {0};
+    octaedro[0][2] = 1;
+    octaedro[1][1] = 1; octaedro[1][2] = 1; octaedro[1][3] = 1;
+    octaedro[2][2] = 1;
+    octaedro[3][1] = 1; octaedro[3][2] = 1; octaedro[3][3] = 1;
+    octaedro[4][2] = 1;
+
+    // Exibir resultados
+    printf("Habilidade Cone:\n");
+    printMatriz(cone);
+
+    printf("Habilidade Cruz:\n");
+    printMatriz(cruz);
+
+    printf("Habilidade Octaedro:\n");
+    printMatriz(octaedro);
+
+    return 0;
+}
