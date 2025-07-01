@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    // Tabuleiro 5x5 (exemplo)
+    int tabuleiro[5][5] = {0};
+
+    // Posicionar navio vertical de 3 partes em (1,1), (2,1), (3,1)
+    for (int i = 1; i <= 3; i++) {
+        tabuleiro[i][1] = 1;  // 1 = navio vertical
+    }
+
+    // Posicionar navio horizontal de 4 partes em (0,3), (0,4), (0,5), (0,6) - dentro do tabuleiro, ajustado para 5x5
+    // Ajuste para 5x5: (0,0), (0,1), (0,2), (0,3)
+    for (int j = 0; j <= 3; j++) {
+        tabuleiro[0][j] = 2;  // 2 = navio horizontal
+    }
+
+    // Exibir coordenadas dos navios
+    printf("Navio Vertical:\n");
+    for (int i = 1; i <= 3; i++) {
+        printf("Parte em: (%d, %d)\n", i, 1);
+    }
+
+    printf("\nNavio Horizontal:\n");
+    for (int j = 0; j <= 3; j++) {
+        printf("Parte em: (%d, %d)\n", 0, j);
+    }
+
+    return 0;
+}
